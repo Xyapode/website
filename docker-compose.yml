@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  web:
+    image: sipth/website:latest
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 2
+      placement:
+        constraints: [node.role == worker]
