@@ -3,74 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>To-Do List avec Calendrier</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>To-Do Pro</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>🗓️ Ma To-Do List</header>
-  <div id="calendar"></div>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">🗓️</div>
+      <nav class="sections">
+        <div class="section">
+          <h2>📅 This week</h2>
+          <ul>
+            <li><input type="checkbox"> Design onboarding</li>
+            <li><input type="checkbox"> Write hiring criteria</li>
+            <li><input type="checkbox"> Publish blog post</li>
+            <li><input type="checkbox"> Book offsite</li>
+          </ul>
+        </div>
+        <div class="section">
+          <h2>🗓️ This month</h2>
+          <ul>
+            <li><input type="checkbox"> Buy coffee filters</li>
+            <li><input type="checkbox"> Cancel Disney+</li>
+            <li><input type="checkbox"> Donate to Unica</li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
 
-  <div class="modal" id="taskModal">
-    <div class="modal-content">
-      <h3 id="modalDate"></h3>
-      <textarea id="taskInput" placeholder="Écris ici ta tâche..."></textarea>
-      <button onclick="saveTask()">Enregistrer</button>
-    </div>
+    <main class="calendar-panel">
+      <div class="calendar-header">
+        <h1>March 2025 / Week 12</h1>
+        <button class="today-btn">Today</button>
+      </div>
+      <div class="week-days">
+        <div>Lun</div>
+        <div>Mar</div>
+        <div>Mer</div>
+        <div>Jeu</div>
+        <div>Ven</div>
+      </div>
+      <div class="calendar-body">
+        <div class="event" style="grid-column: 2; grid-row: 2 / 4">🎨 Weekly design<br><span>10:00 - 12:00</span></div>
+        <div class="event" style="grid-column: 3; grid-row: 3 / 5">📄 Blog post<br><span>10:30 - 12:30</span></div>
+        <div class="event" style="grid-column: 4; grid-row: 2 / 3">🏝️ Book offsite<br><span>8:45 - 10:00</span></div>
+      </div>
+    </main>
   </div>
-
-  <script>
-    const calendar = document.getElementById('calendar');
-    const modal = document.getElementById('taskModal');
-    const modalDate = document.getElementById('modalDate');
-    const taskInput = document.getElementById('taskInput');
-
-    let selectedDay = null;
-    const tasks = {};
-
-    function generateCalendar() {
-      const daysInMonth = 31;
-      const today = new Date();
-      for (let i = 1; i <= daysInMonth; i++) {
-        const day = document.createElement('div');
-        day.classList.add('day');
-        day.textContent = i;
-
-        const key = `${today.getFullYear()}-${today.getMonth()}-${i}`;
-        if (tasks[key]) {
-          day.classList.add('has-task');
-        }
-
-        day.addEventListener('click', () => {
-          selectedDay = key;
-          modalDate.textContent = `Tâches pour le ${i}/${today.getMonth() + 1}`;
-          taskInput.value = tasks[key] || '';
-          modal.style.display = 'flex';
-        });
-
-        calendar.appendChild(day);
-      }
-    }
-
-    function saveTask() {
-      const text = taskInput.value.trim();
-      if (text) {
-        tasks[selectedDay] = text;
-      } else {
-        delete tasks[selectedDay];
-      }
-      modal.style.display = 'none';
-      calendar.innerHTML = '';
-      generateCalendar();
-    }
-
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-
-    generateCalendar();
-  </script>
 </body>
 </html>
