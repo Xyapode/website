@@ -8,6 +8,7 @@ body {
 .app {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -22,6 +23,7 @@ body {
 .logo {
   font-size: 2rem;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .sections .section {
@@ -54,6 +56,7 @@ body {
   background: #fff;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .calendar-header {
@@ -63,13 +66,19 @@ body {
   margin-bottom: 1rem;
 }
 
-.today-btn {
+.calendar-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.today-btn, .share-btn {
   background: black;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .week-days {
@@ -87,22 +96,33 @@ body {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(8, 1fr);
+  grid-template-rows: repeat(10, 60px);
   gap: 5px;
   position: relative;
 }
 
 .event {
-  background: #d0c9f6;
   border-radius: 10px;
   padding: 10px;
   font-size: 0.9rem;
   line-height: 1.2;
   color: #333;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: #ddd;
+  overflow: hidden;
 }
 
 .event span {
   font-size: 0.75rem;
   color: #555;
+  display: block;
+  margin-top: 5px;
+}
+
+.purple {
+  background: #e1d6f6;
+}
+
+.green {
+  background: #d4f5e9;
 }
