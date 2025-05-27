@@ -115,10 +115,10 @@
         <div class="main-content">
             <div class="calendar-header">
                 <div class="month-navigation">
-                    <h2>March 2022</h2>
+                    <h2 id="current-month"></h2>
                     <span>/</span>
                     <div class="week-selector">
-                        <span>W9</span>
+                        <span id="current-week"></span>
                         <span class="dropdown-arrow">▼</span>
                     </div>
                     <div class="nav-arrows">
@@ -127,14 +127,14 @@
                     </div>
                 </div>
                 <div class="header-actions">
-                    <button class="today-btn">Today</button>
+                    <button class="today-btn" onclick="goToToday()"">Today</button>
                     <button class="share-btn">Share</button>
                 </div>
             </div>
 
             <div class="calendar-grid">
                 <!-- Days header -->
-                <div class="days-header">
+                <div class="days-header" id="days-header">
                     <div class="day-column">
                         <div class="day-number">07</div>
                         <div class="day-name">mon</div>
@@ -316,5 +316,6 @@
             <div class="preview-expand">⋮⋮</div>
         </div>
     </div>
+    <script src="app.js"></script>
 </body>
 </html>

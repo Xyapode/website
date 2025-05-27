@@ -1,4 +1,5 @@
-const tasks = JSON.parse(localStorage.getItem("tasks")) || {};
+let tasks = JSON.parse(localStorage.getItem("tasks")) || {};
+let currentDate = new Date();
 
 function renderTasks() {
   const calendar = document.querySelector(".calendar-events");
@@ -28,25 +29,26 @@ function saveTask(date, task) {
   renderTasks();
 }
 
-function renderCurrentDate() {
-  const now = new Date();
+function renderCurrentDate(baseDate = new Date()) {
   const monthOptions = { month: 'long', year: 'numeric' };
-  const currentMonth = now.toLocaleDateString('fr-FR', monthOptions);
+  const currentMonth = baseDate.toLocaleDateString('fr-FR', monthOptions);
   document.getElementById("current-month").textContent = currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1);
 
-  const weekNumber = getWeekNumber(now);
+  const weekNumber = getWeekNumber(baseDate);
   document.getElementById("current-week").textContent = `Semaine ${weekNumber}`;
 
   const daysHeader = document.getElementById("days-header");
   daysHeader.innerHTML = "";
 
-  const monday = getMonday(now);
+  const monday = getMonday(baseDate);
   const formatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'short', day: '2-digit' });
 
   for (let i = 0; i < 5; i++) {
     const day = new Date(monday);
     day.setDate(monday.getDate() + i);
-    const [weekday, num] = formatter.format(day).split(" ");
+    const label = formatter.format(day);
+    const num = day.getDate().toString().padStart(2, '0');
+    const weekday = label.split(" ")[0];
 
     const col = document.createElement("div");
     col.className = "day-column";
@@ -63,16 +65,20 @@ function getMonday(d) {
 }
 
 function getWeekNumber(date) {
-  const firstDay = new Date(date.getFullYear(), 0, 1);
-  const pastDaysOfYear = (date - firstDay + 86400000) / 86400000;
-  return Math.ceil((pastDaysOfYear + firstDay.getDay() + 1) / 7);
+  const target = new Date(date.valueOf());
+  const dayNr = (date.getDay() + 6) % 7;
+  target.setDate(target.getDate() - dayNr + 3);
+  const firstThursday = new Date(target.getFullYear(), 0, 4);
+  const diff = target - firstThursday;
+  return 1 + Math.round(diff / (7 * 24 * 3600 * 1000));
 }
 
 function goToToday() {
-  renderCurrentDate();
+  currentDate = new Date();
+  renderCurrentDate(currentDate);
   renderTasks();
 }
 
 // Initialisation
-renderCurrentDate();
+renderCurrentDate(currentDate);
 renderTasks();
