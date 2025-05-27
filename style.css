@@ -807,21 +807,39 @@ input:focus {
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.4);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    display: none;
+    z-index: 1000;
   }
   .modal-content {
     background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    width: 300px;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 350px;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
+    font-family: sans-serif;
   }
-  .modal-content input, .modal-content select, .modal-content button {
-    padding: 0.5rem;
+  .modal-content h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .modal-content input, .modal-content button {
+    padding: 0.6rem;
     font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  .modal-content button {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .modal-content button:hover {
+    background: #4338ca;
   }

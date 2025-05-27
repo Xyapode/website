@@ -106,13 +106,17 @@ function addTaskFromModal() {
 
   if (!title || !date || !time) return;
 
+  const hour = parseInt(time.split(":")[0]);
+  const topOffset = 76 + (hour - 9) * 60; // 9h = 76px de top de base
+
   saveTask(date, {
     title,
     time,
-    top: "316px",
+    top: `${topOffset}px`,
     left: "24px",
     height: "60px"
   });
+
   modal.style.display = "none";
   document.getElementById("taskTitle").value = "";
   document.getElementById("taskDate").value = "";
