@@ -79,6 +79,12 @@ function goToToday() {
   renderTasks();
 }
 
+function changeWeek(offset) {
+  currentDate.setDate(currentDate.getDate() + offset * 7);
+  renderCurrentDate(currentDate);
+  renderTasks();
+}
+
 // Initialisation
 renderCurrentDate(currentDate);
 renderTasks();
