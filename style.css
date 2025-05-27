@@ -799,3 +799,29 @@ input:focus {
 .gradient-orange {
     background: linear-gradient(135deg, #f97316, #ea580c);
 }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+  }
+  .modal-content {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .modal-content input, .modal-content select, .modal-content button {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }

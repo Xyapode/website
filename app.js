@@ -9,10 +9,10 @@ function renderTasks() {
   for (const [date, items] of Object.entries(tasks)) {
     items.forEach(event => {
       const div = document.createElement("div");
-      div.className = `event ${event.class}`;
-      div.style.top = event.top;
-      div.style.left = event.left;
-      div.style.height = event.height;
+      div.className = `event ${event.class || ''}`;
+      div.style.top = event.top || "316px";
+      div.style.left = event.left || "24px";
+      div.style.height = event.height || "60px";
       div.innerHTML = `
         <div class="event-title">${event.title}</div>
         <div class="event-time">${event.time}</div>
@@ -83,6 +83,40 @@ function changeWeek(offset) {
   currentDate.setDate(currentDate.getDate() + offset * 7);
   renderCurrentDate(currentDate);
   renderTasks();
+}
+
+// Gestion du formulaire modal
+const modal = document.getElementById("taskModal");
+const addButton = document.querySelector(".add-btn");
+if (addButton) {
+  addButton.addEventListener("click", () => {
+    modal.style.display = "flex";
+  });
+}
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+function addTaskFromModal() {
+  const title = document.getElementById("taskTitle").value;
+  const date = document.getElementById("taskDate").value;
+  const time = document.getElementById("taskTime").value;
+
+  if (!title || !date || !time) return;
+
+  saveTask(date, {
+    title,
+    time,
+    top: "316px",
+    left: "24px",
+    height: "60px"
+  });
+  modal.style.display = "none";
+  document.getElementById("taskTitle").value = "";
+  document.getElementById("taskDate").value = "";
+  document.getElementById("taskTime").value = "";
 }
 
 // Initialisation

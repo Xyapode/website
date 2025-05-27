@@ -16,7 +16,7 @@
                     <span class="dot yellow"></span>
                     <span class="dot green"></span>
                 </div>
-                <h1>Todos</h1>
+                <h1>À faire</h1>
                 <div class="header-actions">
                     <button class="add-btn">+</button>
                     <button class="menu-btn">⋯</button>
@@ -152,6 +152,16 @@
                         <div class="time-label">17h00</div>
                         <div class="time-label">18h00</div>
                     </div>
+
+                    <div class="modal" id="taskModal">
+                        <div class="modal-content">
+                          <h3>Nouvelle tâche</h3>
+                          <input type="text" id="taskTitle" placeholder="Titre de la tâche">
+                          <input type="date" id="taskDate">
+                          <input type="time" id="taskTime">
+                          <button onclick="addTaskFromModal()">Ajouter</button>
+                        </div>
+                      </div>                    
 
                     <div class="calendar-events">
                         <!-- Monday events -->
