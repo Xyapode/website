@@ -125,4 +125,8 @@ function addTaskFromModal() {
 
 // Initialisation
 renderCurrentDate(currentDate);
+<<<<<<< HEAD
 renderTasks();
+=======
+renderTasks();
+>>>>>>> 996b01e20049b3aedde749bbd4703a71dbd3f22a
