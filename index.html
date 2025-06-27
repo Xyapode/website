@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos - Calendrier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="app-header">
+                <div class="app-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <h1>Modifier</h1>
+                <div class="header-actions">
+                    <button class="add-btn">+</button>
+                    <button class="menu-btn">⋯</button>
+                </div>
+            </div>
+
+            <div class="sidebar-content">
+                <!-- This week section -->
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-icon">8</div>
+                        <h3>This week</h3>
+                        <button class="collapse-btn">−</button>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <input type="checkbox" id="design">
+                            <label for="design">Design onboarding</label>
+                        </div>
+                        <div class="task-item writing">
+                            <input type="checkbox" id="write">
+                            <label for="write">Write hiring criteria</label>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" id="publish">
+                            <label for="publish">Publish blog post</label>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" id="book">
+                            <label for="book">Book offsite</label>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" id="zapier">
+                            <label for="zapier">Setup Zapier integration</label>
+                        </div>
+                        <div class="add-task">
+                            <span class="plus-icon">+</span>
+                            <span>Todo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- This month section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3>This month</h3>
+                        <button class="add-section-btn">+</button>
+                    </div>
+                </div>
+
+                <!-- Personal section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3>Personal</h3>
+                        <button class="collapse-btn">−</button>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <input type="checkbox" id="coffee">
+                            <label for="coffee">Buy more coffee filters</label>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" id="disney">
+                            <label for="disney">Cancel Disney+</label>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" id="donate">
+                            <label for="donate">Donate to Unica</label>
+                        </div>
+                        <div class="add-task">
+                            <span class="plus-icon">+</span>
+                            <span>Todo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Books to read section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3>Books to read</h3>
+                        <button class="add-section-btn">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User avatars -->
+            <div class="user-avatars">
+                <div class="avatar" style="background: linear-gradient(45deg, #ff6b6b, #ffa726);">D</div>
+                <div class="avatar" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">J</div>
+                <div class="avatar" style="background: linear-gradient(45deg, #a8edea, #fed6e3);">S</div>
+                <div class="expand-icon">></div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <div class="calendar-header">
+                <div class="month-navigation">
+                    <h2 id="current-month"></h2>
+                    <span>/</span>
+                    <div class="week-selector">
+                        <span id="current-week"></span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="nav-arrows">
+                        <button class="nav-btn" onclick="changeWeek(-1)">←</button>
+                        <button class="nav-btn" onclick="changeWeek(1)">→</button>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="today-btn" onclick="goToToday()"">Today</button>
+                    <button class="share-btn">Share</button>
+                </div>
+            </div>
+
+            <div class="calendar-grid">
+                <!-- Days header -->
+                <div class="days-header" id="days-header">
+                </div>
+
+                <!-- Time slots -->
+                <div class="time-grid">
+                    <div class="time-labels">
+                        <div class="time-label">all day</div>
+                        <div class="time-label">9H00</div>
+                        <div class="time-label">10H00</div>
+                        <div class="time-label">11H00</div>
+                        <div class="time-label">Pause-déjeuner</div>
+                        <div class="time-label">13H00</div>
+                        <div class="time-label">14h00</div>
+                        <div class="time-label">15h00</div>
+                        <div class="time-label">16h00</div>
+                        <div class="time-label">17h00</div>
+                        <div class="time-label">18h00</div>
+                    </div>
+
+                    <div class="modal" id="taskModal">
+                        <div class="modal-content">
+                          <h3>Nouvelle tâche</h3>
+                          <input type="text" id="taskTitle" placeholder="Titre de la tâche">
+                          <input type="date" id="taskDate">
+                          <input type="time" id="taskTime">
+                          <button onclick="addTaskFromModal()">Ajouter</button>
+                        </div>
+                      </div>
+                                    
+
+                    <div class="calendar-events">
+                        <!-- Monday events -->
+                        <div class="event monday-sync">
+                            <div class="event-title">Monday sync</div>
+                            <div class="event-time">9 AM</div>
+                        </div>
+
+                        <!-- Tuesday events -->
+                        <div class="event weekly-design">
+                            <div class="event-title">Weekly design</div>
+                            <div class="event-time">10:02 AM</div>
+                        </div>
+
+                        <div class="event emails">
+                            <div class="event-title">Emails</div>
+                            <div class="event-time">1 PM</div>
+                        </div>
+
+                        <div class="event easttown">
+                            <div class="event-title">Easttown project</div>
+                            <div class="event-time">2 PM</div>
+                        </div>
+
+                        <!-- Wednesday events -->
+                        <div class="event design-onboarding">
+                            <div class="event-title">Design onboarding</div>
+                            <div class="event-time">10 AM</div>
+                        </div>
+
+                        <div class="event interview">
+                            <div class="event-title">Boocked for interview</div>
+                            <div class="event-time">1 PM</div>
+                        </div>
+
+                        <!-- Thursday events -->
+                        <div class="event blog-post">
+                            <div class="event-title">Blog post</div>
+                            <div class="event-time">10:30 AM</div>
+                        </div>
+
+                        <div class="event write-news">
+                            <div class="event-title">Write news</div>
+                            <div class="event-time">1 PM</div>
+                        </div>
+
+                        <div class="event design-website">
+                            <div class="event-title">Design our website</div>
+                            <div class="event-time">2 PM</div>
+                        </div>
+
+                        <!-- Friday events -->
+                        <div class="event book-offsite">
+                            <div class="event-title">Book offsite</div>
+                            <div class="event-time">8:45 AM</div>
+                        </div>
+
+                        <div class="event cinema">
+                            <div class="event-title">Cinema</div>
+                            <div class="event-time">10:30 AM</div>
+                        </div>
+
+                        <div class="event clean-house">
+                            <div class="event-title">Clean house</div>
+                            <div class="event-time">11:30 PM</div>
+                        </div>
+
+                        <div class="event date-night">
+                            <div class="event-title">Date night</div>
+                            <div class="event-time">1:30 PM</div>
+                        </div>
+
+                        <div class="event deadpool">
+                            <div class="event-title">Deadpool</div>
+                            <div class="event-time">1 PM</div>
+                        </div>
+
+                        <!-- Lunch breaks -->
+                        <div class="lunch-break lunch-mon">Lunch break<br>12 PM</div>
+                        <div class="lunch-break lunch-tue">Lunch break<br>12 PM</div>
+                        <div class="lunch-break lunch-wed">Lunch break<br>12 PM</div>
+                        <div class="lunch-break lunch-thu">Lunch break<br>12 PM</div>
+                        <div class="lunch-break lunch-fri">Lunch break<br>12 PM</div>
+                        <div class="lunch-break brunch">Brunch<br>12 PM</div>
+                        <div class="lunch-break laundry">Laundry<br>10:30 AM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share panel -->
+        <div class="share-panel">
+            <div class="share-header">
+                <h3>Share with</h3>
+                <div class="share-avatars">
+                    <div class="share-avatar" style="background: linear-gradient(45deg, #ff6b6b, #ffa726);">D</div>
+                    <div class="share-avatar" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">J</div>
+                    <div class="share-avatar" style="background: linear-gradient(45deg, #a8edea, #fed6e3);">S</div>
+                    <div class="search-icon">🔍</div>
+                </div>
+            </div>
+
+            <div class="share-items">
+                <div class="share-item">
+                    <div class="item-icon">⏰</div>
+                    <div class="item-details">
+                        <div class="item-title">Dennis x June</div>
+                        <div class="item-subtitle">30m — calen.co/s54f565656...</div>
+                    </div>
+                </div>
+
+                <div class="share-item">
+                    <div class="item-icon">⏰</div>
+                    <div class="item-details">
+                        <div class="item-title">Team onboarding</div>
+                        <div class="item-subtitle">60m — calen.co/s54f565656...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="create-link">
+                <div class="link-header">
+                    <span>Create share link</span>
+                    <button class="new-btn">New</button>
+                </div>
+                <div class="link-subtitle">Share all, or specific slots</div>
+            </div>
+        </div>
+
+        <!-- Bottom event preview -->
+        <div class="event-preview">
+            <div class="preview-icon">📅</div>
+            <div class="preview-details">
+                <div class="preview-title">Weekly design</div>
+                <div class="preview-subtitle">Upcoming event</div>
+            </div>
+            <div class="preview-avatars">
+                <div class="preview-avatar" style="background: linear-gradient(45deg, #ff6b6b, #ffa726);">D</div>
+                <div class="preview-avatar" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">J</div>
+                <div class="preview-avatar" style="background: linear-gradient(45deg, #a8edea, #fed6e3);">S</div>
+            </div>
+            <div class="preview-expand">⋮⋮</div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
