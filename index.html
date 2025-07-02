@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Todos - Calendrier</title>
+    <title>Todos - Calendar App</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,7 +16,7 @@
                     <span class="dot yellow"></span>
                     <span class="dot green"></span>
                 </div>
-                <h1>Modifier - Test </h1>
+                <h1>Todos</h1>
                 <div class="header-actions">
                     <button class="add-btn">+</button>
                     <button class="menu-btn">⋯</button>
@@ -101,6 +100,24 @@
                         <button class="add-section-btn">+</button>
                     </div>
                 </div>
+
+                <!-- Professional section -->
+                <div class="section professional-section">
+                    <div class="section-header">
+                        <h3>Professional</h3>
+                    </div>
+                    <div class="pricing">
+                        <div class="price">$10</div>
+                        <div class="price-details">
+                            <span>per user</span>
+                            <span>per month</span>
+                        </div>
+                    </div>
+                    <div class="features">
+                        <div>— Unlimited history</div>
+                        <div>— Unlimited share links</div>
+                    </div>
+                </div>
             </div>
 
             <!-- User avatars -->
@@ -116,54 +133,63 @@
         <div class="main-content">
             <div class="calendar-header">
                 <div class="month-navigation">
-                    <h2 id="current-month"></h2>
+                    <h2>March 2022</h2>
                     <span>/</span>
                     <div class="week-selector">
-                        <span id="current-week"></span>
+                        <span>W9</span>
                         <span class="dropdown-arrow">▼</span>
                     </div>
                     <div class="nav-arrows">
-                        <button class="nav-btn" onclick="changeWeek(-1)">←</button>
-                        <button class="nav-btn" onclick="changeWeek(1)">→</button>
+                        <button class="nav-btn">←</button>
+                        <button class="nav-btn">→</button>
                     </div>
                 </div>
                 <div class="header-actions">
-                    <button class="today-btn" onclick="goToToday()"">Today</button>
+                    <button class="today-btn">Today</button>
                     <button class="share-btn">Share</button>
                 </div>
             </div>
 
             <div class="calendar-grid">
                 <!-- Days header -->
-                <div class="days-header" id="days-header">
+                <div class="days-header">
+                    <div class="day-column">
+                        <div class="day-number">07</div>
+                        <div class="day-name">mon</div>
+                    </div>
+                    <div class="day-column">
+                        <div class="day-number">08</div>
+                        <div class="day-name">tue</div>
+                    </div>
+                    <div class="day-column">
+                        <div class="day-number">09</div>
+                        <div class="day-name">wed</div>
+                    </div>
+                    <div class="day-column">
+                        <div class="day-number">10</div>
+                        <div class="day-name">thu</div>
+                    </div>
+                    <div class="day-column">
+                        <div class="day-number">11</div>
+                        <div class="day-name">fri</div>
+                    </div>
                 </div>
 
                 <!-- Time slots -->
                 <div class="time-grid">
                     <div class="time-labels">
                         <div class="time-label">all day</div>
-                        <div class="time-label">9H00</div>
-                        <div class="time-label">10H00</div>
-                        <div class="time-label">11H00</div>
-                        <div class="time-label">Pause-déjeuner</div>
-                        <div class="time-label">13H00</div>
-                        <div class="time-label">14h00</div>
-                        <div class="time-label">15h00</div>
-                        <div class="time-label">16h00</div>
-                        <div class="time-label">17h00</div>
-                        <div class="time-label">18h00</div>
+                        <div class="time-label">9 am</div>
+                        <div class="time-label">10 am</div>
+                        <div class="time-label">11 am</div>
+                        <div class="time-label">noon</div>
+                        <div class="time-label">1 pm</div>
+                        <div class="time-label">2 pm</div>
+                        <div class="time-label">3 pm</div>
+                        <div class="time-label">4 pm</div>
+                        <div class="time-label">5 pm</div>
+                        <div class="time-label">6 pm</div>
                     </div>
-
-                    <div class="modal" id="taskModal">
-                        <div class="modal-content">
-                          <h3>Nouvelle tâche</h3>
-                          <input type="text" id="taskTitle" placeholder="Titre de la tâche">
-                          <input type="date" id="taskDate">
-                          <input type="time" id="taskTime">
-                          <button onclick="addTaskFromModal()">Ajouter</button>
-                        </div>
-                      </div>
-                                    
 
                     <div class="calendar-events">
                         <!-- Monday events -->
@@ -308,6 +334,5 @@
             <div class="preview-expand">⋮⋮</div>
         </div>
     </div>
-    <script src="app.js"></script>
 </body>
 </html>
